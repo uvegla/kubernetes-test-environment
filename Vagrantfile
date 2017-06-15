@@ -3,9 +3,9 @@ masters = [
 ]
 
 minions = [
-  "172.168.96.110",
   "172.168.96.111",
-  "172.168.96.112"
+  "172.168.96.112",
+  "172.168.96.113"
 ]
 
 Vagrant.configure("2") do |config|
@@ -20,17 +20,14 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  minion_no = 1
   minions.each do |ip|
     config.vm.define "kubernetes-minion-#{ip}" do |minion|
       minion.vm.box = "bento/centos-7.3"
       minion.vm.network "private_network", ip: ip
 
       config.vm.provision "shell", path: "provision/common.sh"
-      config.vm.provision "shell", path: "provision/minion.sh", args: [minion_no]
+      config.vm.provision "shell", path: "provision/minion.sh", args: [ip]
     end
-
-    minion_no += 1
   end
 
 end

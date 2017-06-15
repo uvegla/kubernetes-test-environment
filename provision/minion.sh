@@ -1,6 +1,7 @@
 #!/bin/bash
 
-MINION_NO=$1
+IP=$1
+MINION_NO=${IP:(-1)}
 
 function configure-kubelet()
 {

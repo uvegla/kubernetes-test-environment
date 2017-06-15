@@ -4,9 +4,9 @@ function configure-hosts()
 {
   echo "172.168.96.100 centos-master" | tee -a /etc/hosts
 
-  echo "172.168.96.110 centos-minion1" | tee -a /etc/hosts
-  echo "172.168.96.111 centos-minion2" | tee -a /etc/hosts
-  echo "172.168.96.112 centos-minion3" | tee -a /etc/hosts
+  echo "172.168.96.111 centos-minion1" | tee -a /etc/hosts
+  echo "172.168.96.112 centos-minion2" | tee -a /etc/hosts
+  echo "172.168.96.113 centos-minion3" | tee -a /etc/hosts
 }
 
 function add-repo-virt7-docker-common-release-repo()
