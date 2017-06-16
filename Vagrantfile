@@ -11,7 +11,7 @@ minions = [
 Vagrant.configure("2") do |config|
 
   masters.each do |ip|
-    config.vm.define "kubernetes-master-#{ip}" do |master|
+    config.vm.define "master" do |master|
       master.vm.box = "bento/centos-7.3"
       master.vm.network "private_network", ip: ip
 
@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
   end
 
   minions.each do |ip|
-    config.vm.define "kubernetes-minion-#{ip}" do |minion|
+    config.vm.define "minion-#{ip[-1]}" do |minion|
       minion.vm.box = "bento/centos-7.3"
       minion.vm.network "private_network", ip: ip
 

@@ -21,8 +21,8 @@ function configure-etcd()
 
 function enable-and-start-services()
 {
-  systemctl enable etcd kube-apiserver kube-controller-manager kube-scheduler docker
-  systemctl start etcd kube-apiserver kube-controller-manager kube-scheduler docker
+  systemctl enable etcd ntpd kube-apiserver kube-controller-manager kube-scheduler docker
+  systemctl start etcd ntpd kube-apiserver kube-controller-manager kube-scheduler docker
 }
 
 function main()

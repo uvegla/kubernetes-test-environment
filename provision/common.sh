@@ -2,11 +2,11 @@
 
 function configure-hosts()
 {
-  echo "172.168.96.100 centos-master" >> /etc/hosts
+  echo "172.168.96.100 master" >> /etc/hosts
 
-  echo "172.168.96.111 centos-minion1" >> /etc/hosts
-  echo "172.168.96.112 centos-minion2" >> /etc/hosts
-  echo "172.168.96.113 centos-minion3" >> /etc/hosts
+  echo "172.168.96.111 minion-1" >> /etc/hosts
+  echo "172.168.96.112 minion-2" >> /etc/hosts
+  echo "172.168.96.113 minion-3" >> /etc/hosts
 }
 
 function add-repo-virt7-docker-common-release-repo()
@@ -21,9 +21,9 @@ EOF
   yum update -y
 }
 
-function install-ntpd()
+function install-ntp()
 {
-  yum install -y ntpd
+  yum install -y ntp
 }
 
 function install-docker-and-kubernetes()
@@ -40,10 +40,10 @@ function configure-docker()
 
 function configure-kubernetes()
 {
-  sed -i '/KUBE_MASTER/c\KUBE_MASTER="--master=http://centos-master:8080"' /etc/kubernetes/config
+  sed -i '/KUBE_MASTER/c\KUBE_MASTER="--master=http://master:8080"' /etc/kubernetes/config
 
   echo >> /etc/kubernetes/config
-  echo 'KUBE_ETCD_SERVERS="--etcd-servers=http://centos-master:2379"' | tee -a /etc/kubernetes/config
+  echo 'KUBE_ETCD_SERVERS="--etcd-servers=http://master:2379"' | tee -a /etc/kubernetes/config
 }
 
 function stop-services()
@@ -58,7 +58,7 @@ function main()
 
   add-repo-virt7-docker-common-release-repo
 
-  install-ntpd
+  install-ntp
   install-docker-and-kubernetes
 
   configure-hosts
