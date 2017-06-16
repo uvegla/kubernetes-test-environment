@@ -2,11 +2,11 @@
 
 function configure-hosts()
 {
-  echo "172.168.96.100 centos-master" | tee -a /etc/hosts
+  echo "172.168.96.100 centos-master" >> /etc/hosts
 
-  echo "172.168.96.111 centos-minion1" | tee -a /etc/hosts
-  echo "172.168.96.112 centos-minion2" | tee -a /etc/hosts
-  echo "172.168.96.113 centos-minion3" | tee -a /etc/hosts
+  echo "172.168.96.111 centos-minion1" >> /etc/hosts
+  echo "172.168.96.112 centos-minion2" >> /etc/hosts
+  echo "172.168.96.113 centos-minion3" >> /etc/hosts
 }
 
 function add-repo-virt7-docker-common-release-repo()
@@ -42,7 +42,7 @@ function configure-kubernetes()
 {
   sed -i '/KUBE_MASTER/c\KUBE_MASTER="--master=http://centos-master:8080"' /etc/kubernetes/config
 
-  echo | tee -a /etc/kubernetes/config
+  echo >> /etc/kubernetes/config
   echo 'KUBE_ETCD_SERVERS="--etcd-servers=http://centos-master:2379"' | tee -a /etc/kubernetes/config
 }
 
