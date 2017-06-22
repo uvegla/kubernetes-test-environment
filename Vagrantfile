@@ -15,8 +15,8 @@ Vagrant.configure("2") do |config|
       master.vm.box = "bento/centos-7.3"
       master.vm.network "private_network", ip: ip
 
-      config.vm.provision "shell", path: "provision/common.sh"
-      config.vm.provision "shell", path: "provision/master.sh"
+      master.vm.provision "shell", path: "provision/common.sh"
+      master.vm.provision "shell", path: "provision/master.sh"
     end
   end
 
@@ -25,8 +25,8 @@ Vagrant.configure("2") do |config|
       minion.vm.box = "bento/centos-7.3"
       minion.vm.network "private_network", ip: ip
 
-      config.vm.provision "shell", path: "provision/common.sh"
-      config.vm.provision "shell", path: "provision/minion.sh", args: [ip]
+      minion.vm.provision "shell", path: "provision/common.sh"
+      minion.vm.provision "shell", path: "provision/minion.sh", args: [ip]
     end
   end
 
